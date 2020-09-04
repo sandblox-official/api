@@ -14,11 +14,12 @@ import (
 	"gorm.io/gorm"
 )
 
+var dsn = "zane:5245@tcp(127.0.0.1:3306)/gamedb?charset=utf8mb4&parseTime=True&loc=Local"
+var db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
 func main() {
 
 	//Set up and connect database
-	dsn := "zane:5245@tcp(127.0.0.1:3306)/gamedb?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalln("Failed to connect database: ", err)
 	}
