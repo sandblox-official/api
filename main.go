@@ -57,7 +57,7 @@ func worldHandler(w http.ResponseWriter, r *http.Request) {
 		switch vars["first"] {
 		case "by":
 			db.Where("owner = ?", vars["second"]).
-				First(&retWorld)
+				Find(&retWorlds)
 
 		case "popular":
 			db.Where("name = ?", vars["second"]).
@@ -102,6 +102,7 @@ func worldHandler(w http.ResponseWriter, r *http.Request) {
 			//exists!
 			fmt.Fprintln(w, "world exists")
 		} else {
+			log.Println(inWorld.Name, "created by", inWorld.Owner)
 			db.Create(&inWorld)
 		}
 	//case http.MethodDelete:
