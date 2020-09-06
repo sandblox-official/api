@@ -1,4 +1,4 @@
-module github.com/sandblox-official/api
+module github.com/sandblox-official/database-api
 
 go 1.15
 

@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/sandblox-official/api/players"
+	"github.com/sandblox-official/database-api/players"
 
-	"github.com/sandblox-official/api/worlds"
+	"github.com/sandblox-official/database-api/worlds"
 
 	"github.com/gorilla/mux"
 	"gorm.io/driver/mysql"
@@ -20,7 +20,12 @@ var dsn = "zane:52455245@tcp(localhost:3306)/gamedb?charset=utf8mb4&parseTime=Tr
 var db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 func main() {
-
+	f, err := os.OpenFile("./logs/main.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+	log.SetOutput(f)
 	//Set up and connect database
 	if err != nil {
 		log.Fatalln("Failed to connect database: ", err)
